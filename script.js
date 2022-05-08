@@ -1,3 +1,4 @@
+// Pre req Assignments
 let pagination = document.querySelector("#pagination");
 pagination.setAttribute("class", "d-inline-flex");
 let data_id = document.querySelector("#data-id");
@@ -9,6 +10,7 @@ let current = 1;
 let previousVal = current > 1 ? current - 1 : current;
 let nextVal = current < 100 ? current + 1 : current;
 
+// To fetch Data from Data.json file
 const fetchData = async () => {
   let data = await fetch(
     "https://raw.githubusercontent.com/Rajavasanthan/jsondata/master/pagenation.json"
@@ -17,6 +19,7 @@ const fetchData = async () => {
   return newData;
 };
 
+// Display pages betweeen Depending current pages in the pagination part
 const pagesBetween = (data) => {
   let start = parseInt(current / 5) * 5;
   let end = (parseInt(current / 5) + 2) * 5;
@@ -45,10 +48,11 @@ const pagesBetween = (data) => {
   addSelectedOption();
 };
 
+//Display Pages at the footer
 const displayPages = (data) => {
   pagination.innerHTML = "";
-  console.log(current);
   // addSelectedOption();
+  // Calling methods for creating pagination
   includeFirst(data);
   includePrevious(data);
   pagesBetween(data);
@@ -56,6 +60,7 @@ const displayPages = (data) => {
   includeLast(data);
 };
 
+// Adding Previous Button
 const includePrevious = (data) => {
   let previous = document.createElement("button");
   previous.innerHTML = "Previous";
@@ -71,6 +76,7 @@ const includePrevious = (data) => {
   pagination.appendChild(previous);
 };
 
+// Adding  Next button in pagination footer
 const includeNext = (data) => {
   let next = document.createElement("button");
   next.innerHTML = "Next";
@@ -87,6 +93,7 @@ const includeNext = (data) => {
   pagination.appendChild(next);
 };
 
+// Adding First button
 const includeFirst = (data) => {
   let first = document.createElement("button");
   first.innerHTML = "First";
@@ -100,6 +107,7 @@ const includeFirst = (data) => {
   pagination.appendChild(first);
 };
 
+// Adding Last Button in Pagination Footer
 const includeLast = (data) => {
   let last = document.createElement("button");
   last.innerHTML = "Last";
@@ -113,33 +121,38 @@ const includeLast = (data) => {
   pagination.appendChild(last);
 };
 
+// Page data
 const displayCurrent = (data) => {
   displayContent(data[current - 1]);
 };
 
 const addSelectedOption = () => {
   let selectedBtn = document.getElementById(`${current}`);
-  console.log(current);
-  console.log(selectedBtn);
+  // console.log(current);
+  // console.log(selectedBtn);
   selectedBtn.classList.add("selected");
 };
 
+// To remove selected options
 const removeSelectedOption = () => {
   let selectedBtn = document.getElementById(`${current}`);
   console.log(selectedBtn);
   selectedBtn.classList.remove("selected");
 };
 
+//To Display content
 const displayContent = (val) => {
   data_id.innerHTML = val.id;
   data_name.innerHTML = val.name;
   data_email.innerHTML = val.email;
 };
 
+// To invoke display content calls
 const createPagination = async () => {
   let data = await fetchData();
   displayPages(data);
   displayCurrent(data);
 };
 
+// Final page loader
 document.addEventListener("DOMContentLoaded", createPagination);
