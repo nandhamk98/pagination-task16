@@ -1,0 +1,40 @@
+#main-content {
+  height: 75vh;
+  padding: 50px;
+}
+
+#title,
+#description {
+  text-align: center;
+}
+
+.pages {
+  display: flex;
+  justify-content: center;
+}
+
+#pagination {
+  display: inline-block;
+}
+
+#pagination div {
+  display: inline-block;
+}
+
+button {
+  border: 0px;
+  background-color: white;
+  color: red;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+button:hover {
+  background-color: red;
+  color: white;
+}
+
+.selected {
+  background-color: crimson;
+  color: white;
+}
